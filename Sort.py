@@ -3,6 +3,7 @@
 # 本文件基于python3
 import random
 
+
 # 归并算法的合并
 # 看起来非常丑陋
 def Merge(numlist, start, mid, end):
