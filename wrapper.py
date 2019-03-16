@@ -3,13 +3,22 @@
 import functools
 import os
 
+from contextlib import  contextmanager
+
+@contextmanager
+def open_file(*args, **kwargs):
+    f = open(*args, **kwargs)
+    yield  f
+    f.close()
+
+
 def logging(log_file='log.txt'):
     def _wrap(f):
         @functools.wraps(f)
         def _wrapper(*args, **kwargs):
             log_str = "{}, {}".format(f.__name__, "was called")
             file_dir = os.path.join(r"C:\Users\zhangbob\Desktop",log_file)
-            with open(file_dir, 'w') as fb:
+            with open_file(file_dir, 'a') as fb:
                 fb.write(log_str)
             return f(*args, **kwargs)
         return _wrapper
@@ -26,7 +35,7 @@ class logit(object):
         def _wrap(*args, **kwargs):
             log_str = "class {}, {}".format(func.__name__, "Called")
             file_dir = os.path.join(r"C:\Users\zhangbob\Desktop",self._file_dir)
-            with open(file_dir, 'w') as fb:
+            with open_file(file_dir, 'a') as fb:
                 fb.write(log_str)
             return func(*args, **kwargs)
         return _wrap
