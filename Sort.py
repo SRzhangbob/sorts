@@ -86,7 +86,7 @@ def CmpListEqual(numlist, othernumlist):
             return False
     return True
 
-# 测试
+# 测试用例
 def UnitTest():
     for i in range(50):
         Numlist = [random.randint(0, 1000) for i in range(100)]
