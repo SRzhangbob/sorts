@@ -2,6 +2,7 @@
 # 写的排序算法
 # 本文件基于python3
 import random
+import unittest
 
 
 # 归并算法的合并
@@ -97,6 +98,29 @@ def UnitTest():
         print("UnitTest", CmpListEqual(Numlist, sortNumList))
         print("UnitTest1", CmpListEqual(Numlist, Numlist2))
 
+class TestSortMethod(unittest.TestCase):
+    def setUp(self):
+       self.Numlist = [random.randint(0, 1000) for i in range(100)]
+       self.Numlist_2 = self.Numlist[:]
+       self.Numlist_2.sort()
+       print("test start")
+
+    def test_QuickSort(self):
+        self.assertEqual(Quicksort(self.Numlist), self.Numlist_2)
+
+    def test_RandomQuicksort(self):
+        self.assertEqual(RandomQuicksort(self.Numlist), self.Numlist_2)
+
+    def tearDown(self):
+        print("test end")
+
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTests([TestSortMethod('test_QuickSort'), TestSortMethod('test_RandomQuickSort')])
+    return suite
 
 if __name__ == "__main__":
     UnitTest()
+    # unittest.main()
+    runner = unittest.TextTestRunner(verbosity=2)
+    runner.run(suite())
