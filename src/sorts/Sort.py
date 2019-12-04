@@ -87,6 +87,13 @@ def CmpListEqual(numlist, othernumlist):
             return False
     return True
 
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a+b
+    return a
+
+
 # 测试用例
 def UnitTest():
     for i in range(50):
